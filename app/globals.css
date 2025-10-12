@@ -1,0 +1,446 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+    border-radius: 0px;
+  }
+
+  .hide-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .hide-scrollbar::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 0px;
+  }
+
+  .hide-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: transparent;
+  }
+}
+
+@layer components {
+  .form-btn {
+    @reference bg-primary text-dark-100 hover:bg-primary inline-flex min-h-14 w-full items-center justify-center rounded-md px-6 py-2 text-base font-bold !important;
+  }
+
+  .form-input {
+    @reference placeholder:text-light-100 bg-dark-300 min-h-14 w-full border-none text-base font-bold text-white placeholder:font-normal focus-visible:shadow-none focus-visible:ring-0 !important;
+  }
+
+  /* Book Card */
+  .book-title {
+    @reference xs:text-xl mt-2 line-clamp-1 text-base font-semibold text-white;
+  }
+
+  .book-genre {
+    @reference text-light-100 xs:text-base mt-1 line-clamp-1 text-sm italic;
+  }
+
+  .book-loaned {
+    @reference max-xs:justify-center flex flex-row items-center gap-1;
+  }
+
+  .book-btn {
+    @reference bg-dark-600 font-bebas-neue text-primary mt-3 min-h-14 w-full text-base;
+  }
+
+  /* Borrowed Book */
+  .borrowed-book {
+    @reference gradient-vertical xs:w-min relative w-full rounded-2xl p-5;
+  }
+
+  .borrowed-book_cover {
+    @reference flex w-full items-center justify-center rounded-lg px-10 py-4 lg:px-16;
+  }
+
+  /* Book Cover */
+  .book-cover_extra_small {
+    @reference h-10 w-[28.95px];
+  }
+
+  .book-cover_small {
+    @reference h-[76px] w-[55px];
+  }
+
+  .book-cover_medium {
+    @reference h-[199px] w-[144px];
+  }
+
+  .book-cover_regular {
+    @reference xs:w-[174px] xs:h-[239px] h-[169px] w-[114px];
+  }
+
+  .book-cover_wide {
+    @reference xs:w-[296px] xs:h-[404px] h-[354px] w-[256px];
+  }
+
+  /* Book List */
+  .book-list {
+    @reference max-xs:justify-between xs:gap-10 mt-10 flex flex-wrap gap-5;
+  }
+
+  /* Book Overview */
+  .book-overview {
+    @reference flex flex-col-reverse items-center gap-12 sm:gap-32 xl:flex-row xl:gap-8;
+  }
+
+  .book-overview h1 {
+    @reference text-5xl font-semibold text-white md:text-7xl;
+  }
+
+  .book-info {
+    @reference text-light-100 mt-7 flex flex-row flex-wrap gap-4 text-xl;
+  }
+
+  .book-copies {
+    @reference mt-1 flex flex-row flex-wrap gap-4;
+  }
+
+  .book-copies p {
+    @reference text-light-100 text-xl;
+  }
+
+  .book-copies p span {
+    @reference text-primary ml-2 font-semibold;
+  }
+
+  .book-description {
+    @reference text-light-100 mt-2 text-justify text-xl;
+  }
+
+  .book-overview_btn {
+    @reference bg-primary text-dark-100 hover:bg-primary/90 mt-4 min-h-14 w-fit max-md:w-full !important;
+  }
+
+  /* File Upload */
+  .upload-btn {
+    @reference flex min-h-14 w-full items-center justify-center gap-1.5 rounded-md;
+  }
+
+  .upload-filename {
+    @reference mt-1 text-center text-xs;
+  }
+
+  .progress {
+    @reference font-bebas-neue text-light-100 rounded-full bg-green-800 p-0.5 text-center text-[8px] leading-none font-bold;
+  }
+
+  /* Search */
+  .search {
+    @reference bg-dark-300 relative mt-10 flex min-h-14 w-full items-center rounded-xl px-4;
+  }
+
+  .search-input {
+    @reference placeholder:text-light-100 w-full border-none font-bold text-white placeholder:font-normal focus-visible:shadow-none focus-visible:ring-0 !important;
+  }
+
+  /* Book Receipt */
+  .book-receipt_admin-btn {
+    @reference bg-light-300 text-primary-admin hover:bg-light-300/80 rounded-md font-semibold !important;
+  }
+
+  /* Book Ticket */
+  #book-ticket {
+    @reference bg-dark-300 relative mt-10 hidden w-[544px] overflow-hidden py-8;
+  }
+
+  #book-ticket #book-details div {
+    @reference border-light-100/10 space-y-1 rounded-md border p-3;
+  }
+
+  #book-ticket #book-details div p:first-child {
+    @reference text-light-700 text-xs;
+  }
+
+  #book-ticket #book-details div p:last-child {
+    @reference text-sm font-bold text-white;
+  }
+
+  #book-ticket #book-divider div:first-child {
+    @reference absolute top-1/2 -left-3.5 size-7 -translate-y-1/2 rounded-full bg-black;
+  }
+
+  #book-ticket #book-divider div:last-child {
+    @reference absolute top-1/2 -right-3.5 size-7 -translate-y-1/2 rounded-full bg-black;
+  }
+
+  .book-ticket-circles {
+    @reference absolute inset-x-0 -bottom-6 flex flex-row gap-1.5;
+  }
+
+  /* Not Found */
+  #not-found {
+    @reference flex w-full flex-col items-center justify-center text-center;
+  }
+
+  #not-found h4 {
+    @reference mt-6 text-2xl font-semibold text-white;
+  }
+
+  #not-found p {
+    @reference text-light-100 mt-1 w-[360px];
+  }
+
+  .not-found-btn {
+    @reference bg-primary font-bebas-neue text-dark-100 hover:bg-primary/90 mt-6 min-h-12 min-w-[360px] text-xl !important;
+  }
+
+  /* Pagination */
+  #pagination {
+    @reference flex flex-row justify-end gap-3;
+  }
+
+  .pagination-btn_light {
+    @reference bg-light-300 text-dark-300 hover:bg-light-300/70 !important;
+  }
+
+  .pagination-btn_dark {
+    @reference bg-dark-300 hover:bg-dark-100 !important;
+  }
+
+  #pagination p {
+    @reference inline-flex items-center rounded-md px-4 py-1.5 text-center text-sm font-semibold;
+  }
+
+  /* Sort */
+  .select-trigger {
+    @reference bg-dark-300 text-light-100 border-dark-100 h-10 w-40 px-4 !important;
+  }
+
+  .select-content {
+    @reference bg-dark-300 text-light-100 border-dark-100 !important;
+  }
+
+  .select-item {
+    @reference focus:bg-dark-600 focus:text-light-100 !important;
+  }
+}
+
+@layer utilities {
+  .gradient-vertical {
+    background: linear-gradient(180deg, #12141d 0%, #12151f 100%);
+  }
+
+  .gradient-gray {
+    background: linear-gradient(270deg, #37363a 0%, #353637 100%);
+  }
+
+  .gradient-blue {
+    background: linear-gradient(180deg, #232839 0%, #12141d 100%);
+  }
+
+  /* Auth */
+  .auth-container {
+    @reference text-light-100 relative flex flex-col-reverse sm:flex-row;
+  }
+
+  .auth-form {
+    @reference bg-pattern bg-dark-100 my-auto flex h-full min-h-screen flex-1 items-center bg-cover bg-top px-5 py-10;
+  }
+
+  .auth-box {
+    @reference gradient-vertical mx-auto flex max-w-xl flex-col gap-6 rounded-lg p-10;
+  }
+
+  .auth-illustration {
+    @reference sticky h-40 w-full sm:top-0 sm:h-screen sm:flex-1;
+  }
+
+  /* Root */
+  .root-container {
+    @reference bg-pattern bg-dark-100 xs:px-10 flex min-h-screen flex-1 flex-col bg-cover bg-top px-5 md:px-16;
+  }
+
+  /* Book Details */
+  .book-details {
+    @reference mt-16 mb-20 flex flex-col gap-16 lg:mt-36 lg:flex-row;
+  }
+
+  .book-details h3 {
+    @reference text-primary text-xl font-semibold;
+  }
+
+  /* Library */
+  .library {
+    @reference mx-auto flex w-full max-w-xl flex-col text-center;
+  }
+
+  .library-subtitle {
+    @reference text-light-100 text-lg font-semibold uppercase;
+  }
+
+  .library-title {
+    @reference xs:text-5xl mt-2 text-3xl font-semibold text-white;
+  }
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+}
+
+:root {
+  /* Primary */
+  --primary: #e7c9a5;
+  --primary-admin: #25388c;
+
+  /* Green */
+  --green: #027a48;
+  --green-100: #ecfdf3;
+  --green-400: #4c7b62;
+  --green-500: #2cc171;
+  --green-800: #027a48;
+
+  /* Red */
+  --red: #ef3a4b;
+  --red-400: #f46f70;
+  --red-500: #e27233;
+  --red-800: #ef3a4b;
+
+  /* Blue */
+  --blue-100: #0089f1;
+
+  /* Light */
+  --light-100: #d6e0ff;
+  --light-200: #eed1ac;
+  --light-300: #f8f8ff;
+  --light-400: #edf1f1;
+  --light-500: #8d8d8d;
+  --light-600: #f9fafb;
+  --light-700: #e2e8f0;
+  --light-800: #f8fafc;
+
+  /* Dark */
+  --dark-100: #16191e;
+  --dark-200: #3a354e;
+  --dark-300: #232839;
+  --dark-400: #1e293b;
+  --dark-500: #0f172a;
+  --dark-600: #333c5c;
+  --dark-700: #464f6f;
+  --dark-800: #1e2230;
+
+  /* Gray */
+  --gray-100: #cbd5e1;
+
+  /* Base colors from your theme */
+  --background: #ffffff;
+  --foreground: #0f172a;
+  --border: #cbd5e1;
+  --input: #e2e8f0;
+  --ring: #25388c;
+
+  --radius: 0.625rem;
+
+  --muted: 0 0% 96.1%;
+  --muted-foreground: 0 0% 70.1%;
+}
+
+.dark {
+  --primary: #25388c;
+  --primary-admin: #e7c9a5;
+
+  --green: #2cc171;
+  --green-100: #4c7b62;
+  --green-400: #2cc171;
+  --green-500: #027a48;
+  --green-800: #027a48;
+
+  --red: #ef3a4b;
+  --red-400: #f46f70;
+  --red-500: #e27233;
+  --red-800: #ef3a4b;
+
+  --blue-100: #0089f1;
+
+  --light-100: #333c5c;
+  --light-200: #3a354e;
+  --light-300: #232839;
+  --light-400: #1e293b;
+  --light-500: #cbd5e1;
+  --light-600: #16191e;
+  --light-700: #1e2230;
+  --light-800: #0f172a;
+
+  --dark-100: #f8fafc;
+  --dark-200: #e2e8f0;
+  --dark-300: #f9fafb;
+  --dark-400: #edf1f1;
+  --dark-500: #eed1ac;
+  --dark-600: #e7c9a5;
+  --dark-700: #d6e0ff;
+  --dark-800: #cbd5e1;
+
+  --gray-100: #cbd5e1;
+
+  --background: #0f172a;
+  --foreground: #f8fafc;
+  --border: #1e2230;
+  --input: #1e2230;
+  --ring: #e7c9a5;
+
+  --muted: 0 0% 14.9%;
+  --muted-foreground: 0 0% 63.9%;
+}
+
+@layer base {
+  * {
+    @reference border-border outline-ring/50;
+  }
+  body {
+    @reference bg-background text-foreground;
+  }
+  :root {
+    --bebas-neue: "Bebas Neue";
+  }
+  .font-bebas-neue {
+    font-family: var(--bebas-neue), sans-serif;
+  }
+}

@@ -7,6 +7,7 @@ import { hash } from "bcryptjs";
 import { eq } from "drizzle-orm";
 import { workflowClient } from "../workflow";
 import config from "../config";
+import { sendEmail } from "@/app/api/workflows/onboarding/route";
 
 export const signInWithCredentials = async (
   params: Pick<AuthCredentials, "email" | "password">
@@ -22,6 +23,13 @@ export const signInWithCredentials = async (
     if (result?.error) {
       return { success: false, error: result.error };
     }
+
+    await sendEmail(
+      "Hi again! Welcome back to our platform.",
+      email,
+      "sign-in"
+    );
+
     return { success: true };
   } catch (error) {
     console.log(error, "sign-up error");
@@ -34,11 +42,13 @@ export const signInWithCredentials = async (
 
 export const signUp = async (params: AuthCredentials) => {
   const { fullName, email, password, universityCard, universityId } = params;
+
   const existingUser = await db
     .select()
     .from(users)
     .where(eq(users.email, email))
     .limit(1);
+
   if (existingUser.length > 0) {
     return { success: false, error: "User already exists" };
   }

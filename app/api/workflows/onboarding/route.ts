@@ -53,7 +53,7 @@ export const { POST } = serve<InitialData>(async (context) => {
   }
 });
 
-async function sendEmail(message: string, email: string, type: string) {
+export async function sendEmail(message: string, email: string, type: string) {
   try {
     const templateParams = {
       to_email: email,

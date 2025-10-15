@@ -43,7 +43,11 @@ function BookCard({
                 Loaned
               </span>
 
-              <Button type="button" size="sm">
+              <Button
+                type="button"
+                size="sm"
+                className="bg-primary hover:bg-primary/90 cursor-pointer text-[var(--dark-100)]"
+              >
                 Download Receipt
               </Button>
             </div>

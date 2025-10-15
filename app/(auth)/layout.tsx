@@ -1,8 +1,14 @@
+import { auth } from "@/auth";
 import { BookA } from "lucide-react";
 import Image from "next/image";
+import { redirect } from "next/navigation";
 import React, { ReactNode } from "react";
 
-function layout({ children }: { children: ReactNode }) {
+async function layout({ children }: { children: ReactNode }) {
+  const session = await auth();
+  if (session) {
+    redirect("/");
+  }
   return (
     <main className="relative flex flex-col-reverse text-[var(--light-100)] sm:flex-row">
       <section className="bg-pattern my-auto flex h-full min-h-screen flex-1 items-center bg-[var(--dark-500)] bg-cover bg-top px-5 py-10">

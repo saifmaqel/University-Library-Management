@@ -1,4 +1,5 @@
 "use client";
+
 import React from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -22,9 +23,9 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
-import router from "next/router";
 import { toast } from "sonner";
 import { FIELD_NAMES, FIELD_TYPES } from "@/constants";
+import { useRouter } from "next/navigation";
 
 interface Props<T extends FieldValues> {
   schema: ZodType<T, FieldValues>;
@@ -39,6 +40,8 @@ function AuthForm<T extends FieldValues>({
   defaultValues,
   onSubmit
 }: Props<T>) {
+  const router = useRouter();
+
   const isSignIn = type === "SIGN_IN";
 
   const form: UseFormReturn<FieldValues, unknown, T> = useForm({
@@ -50,7 +53,7 @@ function AuthForm<T extends FieldValues>({
     const result = await onSubmit(data);
 
     if (result.success) {
-      toast("Success", {
+      toast.success("Success", {
         description: isSignIn
           ? "You have successfully signed in."
           : "You have successfully signed up.",
@@ -58,7 +61,7 @@ function AuthForm<T extends FieldValues>({
       });
       router.push("/");
     } else {
-      toast(`Error ${isSignIn ? "signing in" : "signing up"}`, {
+      toast.error(`Error ${isSignIn ? "signing in" : "signing up"}`, {
         description: result.error ?? "An error occurred.",
         closeButton: true
       });
@@ -89,7 +92,7 @@ function AuthForm<T extends FieldValues>({
                   </FormLabel>
                   <FormControl>
                     {field.name === "universityCard" ? (
-                      <></>
+                      <div></div>
                     ) : (
                       <Input
                         required
@@ -108,7 +111,7 @@ function AuthForm<T extends FieldValues>({
           ))}
           <Button
             type="submit"
-            className="bg-primary hover:bg- inline-flex min-h-14 w-full cursor-pointer items-center justify-center rounded-md px-6 py-2 text-base font-bold text-[var(--dark-100)]"
+            className="bg-primary hover:bg-primary/90 inline-flex min-h-14 w-full cursor-pointer items-center justify-center rounded-md px-6 py-2 text-base font-bold text-[var(--dark-100)]"
           >
             Submit
           </Button>

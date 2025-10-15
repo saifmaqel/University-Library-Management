@@ -8,6 +8,13 @@
       "when": 1760284251730,
       "tag": "0000_typical_clea",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1760284732254,
+      "tag": "0001_right_champions",
+      "breakpoints": true
     }
   ]
 }

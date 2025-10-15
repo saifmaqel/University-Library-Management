@@ -1,12 +1,11 @@
 import {
+  varchar,
   uuid,
   integer,
   text,
-  boolean,
   pgTable,
-  pgEnum,
-  varchar,
   date,
+  pgEnum,
   timestamp
 } from "drizzle-orm/pg-core";
 
@@ -17,8 +16,8 @@ export const STATUS_ENUM = pgEnum("status", [
 ]);
 export const ROLE_ENUM = pgEnum("role", ["USER", "ADMIN"]);
 export const BORROW_STATUS_ENUM = pgEnum("borrow_status", [
-  "BORROWD",
-  "RETURND"
+  "BORROWED",
+  "RETURNED"
 ]);
 
 export const users = pgTable("users", {
@@ -27,9 +26,11 @@ export const users = pgTable("users", {
   email: text("email").notNull().unique(),
   universityId: integer("university_id").notNull().unique(),
   password: text("password").notNull(),
-  universittCard: text("university_card").notNull().unique(),
+  universityCard: text("university_card").notNull(),
   status: STATUS_ENUM("status").default("PENDING"),
   role: ROLE_ENUM("role").default("USER"),
   lastActivityDate: date("last_activity_date").defaultNow(),
-  createdAt: timestamp("created_at", { withTimezone: true }).defaultNow()
+  createdAt: timestamp("created_at", {
+    withTimezone: true
+  }).defaultNow()
 });

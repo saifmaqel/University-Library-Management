@@ -1,5 +1,6 @@
 "use client";
 import AuthForm from "@/components/AuthForm";
+import { signUp } from "@/lib/actions/auth";
 import { SignUpData, signUpSchema } from "@/lib/validations";
 import React from "react";
 
@@ -13,9 +14,9 @@ function page() {
         email: "",
         password: "",
         universityId: 0,
-        universityCard: ""
+        universityCard: "test"
       }}
-      onSubmit={() => {}}
+      onSubmit={signUp}
     />
   );
 }

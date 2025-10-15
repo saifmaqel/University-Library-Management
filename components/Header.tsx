@@ -1,11 +1,13 @@
 "use client";
-import { cn } from "@/lib/utils";
+import { cn, getInitals } from "@/lib/utils";
 import { BookA } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Session } from "next-auth";
 
-function Header() {
+function Header({ session }: { session: Session }) {
   const pathname = usePathname();
 
   return (
@@ -26,13 +28,22 @@ function Header() {
           <Link
             href="/library"
             className={cn(
-              "cursor-pointer text-base capitalize",
+              "cursor-pointer text-base font-semibold capitalize",
               pathname === "/library"
                 ? "text-[var(--light-200)]"
                 : "text-[var(--light-100)]"
             )}
           >
             library
+          </Link>
+        </li>
+        <li>
+          <Link href="/my-profile" className={cn("cursor-pointer")}>
+            <Avatar>
+              <AvatarFallback className="bg-amber-100">
+                {getInitals(session.user?.name ?? "IN")}
+              </AvatarFallback>
+            </Avatar>
           </Link>
         </li>
       </ul>

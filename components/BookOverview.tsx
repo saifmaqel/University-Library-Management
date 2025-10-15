@@ -18,7 +18,7 @@ function BookOverview({
     <section className="flex flex-col-reverse items-center gap-12 tracking-tight sm:gap-32 xl:flex-row xl:gap-8">
       <div className="flex flex-1 flex-col gap-5">
         <h1 className="text-5xl font-bold text-[var(--light-300)]">{title}</h1>
-        <div className="text-xl; mt-7 flex flex-row flex-wrap gap-3 text-[var(--light-100)]">
+        <div className="mt-7 flex flex-row flex-wrap gap-5 text-base text-[var(--light-100)]">
           <p>
             By{" "}
             <span className="font-semibold text-[var(--light-200)]">
@@ -36,7 +36,7 @@ function BookOverview({
             <p>{rating} </p>
           </div>
         </div>
-        <div className="mt-1 flex flex-row flex-wrap gap-2 text-xl text-[var(--light-100)]">
+        <div className="mt-1 flex flex-row flex-wrap gap-8 text-base text-[var(--light-100)]">
           <p className="">
             Total Books:
             <span className="text-primary ml-2 font-semibold">
@@ -53,10 +53,13 @@ function BookOverview({
         <p className="text-muted-foreground mt-2 text-justify text-sm/5 tracking-tight">
           {description}
         </p>
-        <Button size={"sm"}>
+        <Button
+          size={"sm"}
+          className="bg-primary hover:bg-primary/90 mt-4 w-full cursor-pointer text-[var(--dark-100)]"
+        >
           <div className="flex items-center gap-1">
             <Book width={26} height={26} />
-            <p className="font-bebas-neue text-dark-100 text-base">Borrow</p>
+            <p className="font-bebas-neue text-base">Borrow</p>
           </div>
         </Button>
       </div>

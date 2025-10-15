@@ -1,4 +1,4 @@
-import { Book, BookIcon, StarIcon } from "lucide-react";
+import { Book, BookIcon, StarIcon, DotSquare, Dot } from "lucide-react";
 import React from "react";
 import { Button } from "./ui/button";
 import BookCover from "./BookCover";
@@ -17,6 +17,11 @@ function BookOverview({
   return (
     <section className="flex flex-col-reverse items-center gap-12 tracking-tight sm:gap-32 xl:flex-row xl:gap-8">
       <div className="flex flex-1 flex-col gap-5">
+        <p className="text-primary text-lg font-medium italic">
+          ⚙️ This website is currently under development. Some features may be
+          incomplete.
+        </p>
+
         <h1 className="text-5xl font-bold text-[var(--light-300)]">{title}</h1>
         <div className="mt-7 flex flex-row flex-wrap gap-5 text-base text-[var(--light-100)]">
           <p>

@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   DefaultValues,
@@ -15,7 +15,6 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -34,6 +33,8 @@ interface Props<T extends FieldValues> {
   type: "SIGN_IN" | "SIGN_UP";
 }
 
+import { Loader2 } from "lucide-react";
+
 function AuthForm<T extends FieldValues>({
   type,
   schema,
@@ -41,6 +42,7 @@ function AuthForm<T extends FieldValues>({
   onSubmit
 }: Props<T>) {
   const router = useRouter();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const isSignIn = type === "SIGN_IN";
 
@@ -50,21 +52,27 @@ function AuthForm<T extends FieldValues>({
   });
 
   const handleSubmit: SubmitHandler<T> = async (data) => {
-    const result = await onSubmit(data);
+    setIsSubmitting(true);
 
-    if (result.success) {
-      toast.success("Success", {
-        description: isSignIn
-          ? "You have successfully signed in."
-          : "You have successfully signed up.",
-        closeButton: true
-      });
-      router.push("/");
-    } else {
-      toast.error(`Error ${isSignIn ? "signing in" : "signing up"}`, {
-        description: result.error ?? "An error occurred.",
-        closeButton: true
-      });
+    try {
+      const result = await onSubmit(data);
+
+      if (result.success) {
+        toast.success("Success", {
+          description: isSignIn
+            ? "You have successfully signed in."
+            : "You have successfully signed up.",
+          closeButton: true
+        });
+        router.push("/");
+      } else {
+        toast.error(`Error ${isSignIn ? "signing in" : "signing up"}`, {
+          description: result.error ?? "An error occurred.",
+          closeButton: true
+        });
+      }
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -101,6 +109,7 @@ function AuthForm<T extends FieldValues>({
                         }
                         {...field}
                         className="min-h-10 w-full border-none bg-[var(--dark-300)] text-base font-bold text-white placeholder:font-normal placeholder:text-[var(--light-100)] focus-visible:shadow-none focus-visible:ring-0"
+                        disabled={isSubmitting}
                       />
                     )}
                   </FormControl>
@@ -111,9 +120,17 @@ function AuthForm<T extends FieldValues>({
           ))}
           <Button
             type="submit"
-            className="bg-primary hover:bg-primary/90 inline-flex min-h-14 w-full cursor-pointer items-center justify-center rounded-md px-6 py-2 text-base font-bold text-[var(--dark-100)]"
+            disabled={isSubmitting}
+            className="bg-primary hover:bg-primary/90 inline-flex min-h-14 w-full cursor-pointer items-center justify-center rounded-md px-6 py-2 text-base font-bold text-[var(--dark-100)] disabled:cursor-not-allowed disabled:opacity-50"
           >
-            Submit
+            {isSubmitting ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                {isSignIn ? "Signing in..." : "Signing up..."}
+              </>
+            ) : (
+              "Submit"
+            )}
           </Button>
         </form>
       </Form>

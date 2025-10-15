@@ -22,7 +22,6 @@ function Header({ session }: { session: Session }) {
       >
         <BookA width={40} height={40} />
       </Link>
-
       <ul className="flex flex-row items-center gap-8">
         <li>
           <Link

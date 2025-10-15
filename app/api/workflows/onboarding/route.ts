@@ -63,8 +63,8 @@ export async function sendEmail(message: string, email: string, type: string) {
       "template_gy11roa",
       templateParams,
       {
-        publicKey: "z2cnmRnB_V8SVLt00", // Add your public key
-        privateKey: "GG54WEof_Z5omjujBW2w7" // Add your private key from EmailJS
+        publicKey: "z2cnmRnB_V8SVLt00",
+        privateKey: "GG54WEof_Z5omjujBW2w7" //TODO SHOULD BE IN ENV FILE BUT LATER
       }
     );
 

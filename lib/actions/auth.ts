@@ -32,10 +32,10 @@ export const signInWithCredentials = async (
 
     return { success: true };
   } catch (error) {
-    console.log(error, "sign-up error");
+    console.log(error, "sign-in error");
     return {
       success: false,
-      error: "sign-up error"
+      error: "sign-in error"
     };
   }
 };

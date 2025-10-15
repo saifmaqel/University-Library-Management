@@ -1,11 +1,8 @@
 import { serve } from "@upstash/workflow/nextjs";
-import emailjs from "@emailjs/browser";
+import emailjs from "@emailjs/nodejs";
 import { db } from "@/database/drizzle";
 import { users } from "@/database/schema";
 import { eq } from "drizzle-orm";
-
-// Initialize EmailJS (add this at the top of your file or in a separate config)
-emailjs.init("z2cnmRnB_V8SVLt00"); // Get from EmailJS dashboard
 
 type InitialData = {
   email: string;
@@ -62,9 +59,13 @@ export async function sendEmail(message: string, email: string, type: string) {
     };
 
     const response = await emailjs.send(
-      "service_vpfnza3", // Get from EmailJS dashboard
-      "template_gy11roa", // Get from EmailJS dashboard
-      templateParams
+      "service_vpfnza3",
+      "template_gy11roa",
+      templateParams,
+      {
+        publicKey: "z2cnmRnB_V8SVLt00", // Add your public key
+        privateKey: "GG54WEof_Z5omjujBW2w7" // Add your private key from EmailJS
+      }
     );
 
     console.log(`Email sent successfully to ${email}:`, response.status);
@@ -79,6 +80,8 @@ function getSubject(type: string): string {
   switch (type) {
     case "welcome":
       return "Welcome to Our Platform!";
+    case "sign-in":
+      return "Welcome Back!";
     case "non-active":
       return "We Miss You!";
     case "active":

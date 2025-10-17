@@ -15,6 +15,13 @@
       "when": 1760284732254,
       "tag": "0001_right_champions",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1760637276949,
+      "tag": "0002_huge_prism",
+      "breakpoints": true
     }
   ]
 }

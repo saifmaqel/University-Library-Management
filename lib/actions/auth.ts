@@ -8,6 +8,7 @@ import { eq } from "drizzle-orm";
 import { workflowClient } from "../workflow";
 import config from "../config";
 import { sendEmail } from "@/app/api/workflows/onboarding/route";
+import { signOut } from "@/auth";
 
 export const signInWithCredentials = async (
   params: Pick<AuthCredentials, "email" | "password">
@@ -83,3 +84,7 @@ export const signUp = async (params: AuthCredentials) => {
     };
   }
 };
+
+export async function signOutAction() {
+  await signOut();
+}

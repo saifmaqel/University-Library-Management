@@ -1,34 +1,38 @@
-import { signOut } from "@/auth";
+import { auth } from "@/auth";
 import BookList from "@/components/BookList";
-import { Button } from "@/components/ui/button";
-import { sampleBooks } from "@/constants";
+import { db } from "@/database/drizzle";
+import { books, borrowRecords } from "@/database/schema";
+import { eq } from "drizzle-orm";
 import React from "react";
 
-function page() {
+async function page() {
+  const session = await auth();
+
+  const userId = session?.user?.id;
+
+  const borrowedBooksRaw: Book[] = await db
+    .select({
+      id: books.id,
+      title: books.title,
+      author: books.author,
+      genre: books.genre,
+      rating: books.rating,
+      totalCopies: books.totalCopies,
+      availableCopies: books.availableCopies,
+      description: books.description,
+      coverColor: books.coverColor,
+      coverUrl: books.coverUrl,
+      videoUrl: books.videoUrl,
+      summary: books.summary,
+      createdAt: books.createdAt
+    })
+    .from(books)
+    .innerJoin(borrowRecords, eq(borrowRecords.bookId, books.id))
+    .where(eq(borrowRecords.userId, userId!));
+
   return (
     <>
-      <form
-        action={async () => {
-          "use server";
-          await signOut();
-        }}
-        className="mb-10 flex justify-between"
-      >
-        <Button
-          size="lg"
-          className="bg-primary hover:bg-primary/80 w-xs cursor-pointer font-extrabold text-[var(--dark-100)]"
-        >
-          Logout
-        </Button>
-        {/* <Button
-          size="lg"
-          className="w-xs cursor-pointer bg-[var(--red-400)] text-[var(--dark-100)] hover:bg-[var(--red-800)]"
-          // onClick={(e) => e.preventDefault()}
-        >
-          Delete Account
-        </Button> */}
-      </form>
-      <BookList title="Your Borrowed Books" books={sampleBooks} />
+      <BookList title="Your Borrowed Books" books={borrowedBooksRaw} />
     </>
   );
 }

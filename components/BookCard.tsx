@@ -3,26 +3,16 @@ import React from "react";
 import BookCover from "./BookCover";
 import { cn } from "@/lib/utils";
 import { Button } from "./ui/button";
-import Image from "next/image";
-import { Calendar } from "lucide-react";
 
-function BookCard({
-  title,
-  author,
-  genre,
-  id,
-  color,
-  isLoanedBook,
-  cover
-}: Book) {
+function BookCard({ title, author, genre, id, coverColor, coverUrl }: Book) {
+  const isLoanedBook = false;
   return (
     <li className={cn(isLoanedBook && "xs:w-52 w-full")}>
       <Link
         href={`books/${id}`}
         className={cn(isLoanedBook && "flex w-full flex-col items-center")}
       >
-        <BookCover coverColor={color} coverImage={cover} />
-
+        <BookCover coverColor={coverColor} coverImage={coverUrl} />
         <div
           className={cn(
             "mt-4 text-center",

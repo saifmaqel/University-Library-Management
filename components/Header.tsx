@@ -2,10 +2,12 @@
 import { cn, getInitals } from "@/lib/utils";
 import { BookA } from "lucide-react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { redirect, usePathname } from "next/navigation";
 import React from "react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Session } from "next-auth";
+import { Button } from "./ui/button";
+import { signOutAction } from "@/lib/actions/auth";
 
 function Header({ session }: { session: Session }) {
   const pathname = usePathname();
@@ -24,26 +26,34 @@ function Header({ session }: { session: Session }) {
       </Link>
       <ul className="flex flex-row items-center gap-8">
         <li>
-          <Link
-            href="/library"
-            className={cn(
-              "cursor-pointer text-base font-semibold capitalize",
-              pathname === "/library"
-                ? "text-[var(--light-200)]"
-                : "text-[var(--light-100)]"
-            )}
-          >
-            library
-          </Link>
-        </li>
-        <li>
           <Link href="/my-profile" className={cn("cursor-pointer")}>
             <Avatar>
-              <AvatarFallback className="bg-amber-100">
+              <AvatarFallback className="bg-amber-100 font-semibold">
                 {getInitals(session.user?.name ?? "IN")}
               </AvatarFallback>
             </Avatar>
           </Link>
+        </li>
+        <li>
+          <form action={signOutAction} className="flex justify-between">
+            <Button
+              size="lg"
+              className="bg-primary hover:bg-primary/80 cursor-pointer font-extrabold text-[var(--dark-100)]"
+            >
+              Logout
+            </Button>
+          </form>
+        </li>
+        <li>
+          <Button
+            size="lg"
+            className="bg-primary hover:bg-primary/80 cursor-pointer font-extrabold text-[var(--dark-100)]"
+            onClick={() => {
+              redirect("/admin");
+            }}
+          >
+            Admin
+          </Button>
         </li>
       </ul>
     </header>
